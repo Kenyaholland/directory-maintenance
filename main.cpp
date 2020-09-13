@@ -7,8 +7,9 @@ int main(){
 	fileSystem->mkdir("def");
 	fileSystem->ls();
 	fileSystem->cd("def");
-	fileSystem->cd("..");
-	fileSystem->cd("..");
+	fileSystem->mkdir("123");
+	fileSystem->addf("456");
+	fileSystem->ls();
 
 	return 0;	
 }

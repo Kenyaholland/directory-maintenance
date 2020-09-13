@@ -18,6 +18,7 @@ void FileManager::mkdir(std::string name){
 		this->curDir->setChild(newDir);
 		newDir->setParent(curDir);
 		this->cur = newDir;
+		this->prev = nullptr;
 		std::cout << newDir->getName() << " directory created." << std::endl;
 	}
 	else if(curDir->getChild()->getName() != newDir->getName()){
@@ -33,12 +34,13 @@ void FileManager::mkdir(std::string name){
 }
 
 void FileManager::addf(std::string name){
-        Node* newFile = new Node(name, true);
+        Node* newFile = new Node(name, false);
 
         if(curDir->getChild() == nullptr){
                 this->curDir->setChild(newFile);
                 newFile->setParent(curDir);
                 this->cur = newFile;
+		this->prev = nullptr;
                 std::cout << newFile->getName() << " file created." << std::endl;
         }
         else if(curDir->getChild()->getName() != newFile->getName()){
@@ -70,7 +72,10 @@ void FileManager::ls(){
 	Node* tempNode = this->curDir->getChild();
 
 	while(tempNode != nullptr){
-		std::cout << tempNode->getName() << std::endl;
+		if(tempNode->getIsDir() == true)
+			std::cout << "D " << tempNode->getName() << std::endl;
+		else
+			std::cout << "F " << tempNode->getName() << std::endl;
 		tempNode = tempNode->getNextForD();
 	}
 }
@@ -100,4 +105,21 @@ void FileManager::cd(std::string dirName){
 			}
 		}
 	}
+}
+
+void FileManager::rm(std::string){
+	//make things insert alphabetically first
+}
+
+void FileManager::mv(std::string fromName, std::string toName){
+	Node* tempNode = this->curDir->getChild();
+
+	while(tempNode != nullptr){
+		if(tempNode->getName() == toName){
+			std::cout << toName << " already exists in " << this->curDir->getName() << std::endl;
+		}
+		tempNode = tempNode->getNextForD();
+	}
+
+	//remove and reinsert.
 }
