@@ -1,10 +1,14 @@
 #include <iostream>
-#include "node.hpp"
-
+#include "filemanager.hpp"
 int main(){
-	Node* newNode = new Node("Kenya", true);
-	
-	std::cout << newNode->getName() << " " << newNode->getIsDir() << std::endl;
+	FileManager* fileSystem = new FileManager();
+
+	fileSystem->addf("abc");
+	fileSystem->mkdir("def");
+	fileSystem->ls();
+	fileSystem->cd("def");
+	fileSystem->cd("..");
+	fileSystem->cd("..");
 
 	return 0;	
 }

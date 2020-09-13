@@ -14,7 +14,7 @@ class Node{
 		Node(std::string nodeName, bool isDirectory);
 		Node();
 		void addNextForD(Node* nextChild);
-		void setChild(Node* child, bool isDir);
+		void setChild(Node* child);
 		void removeChild();
 		void setName(std::string nodeName);
 		void setParent(Node* parent);

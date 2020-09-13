@@ -15,10 +15,9 @@ Node::Node(std::string nodeName, bool isDirectory){
 	this->parent = nullptr;
 }
 
-void Node::setChild(Node* child, bool isDir)
+void Node::setChild(Node* child)
 {
 	this->child = child;
-	this->isDirectory = isDir;
 }
 
 void Node::removeChild(){
