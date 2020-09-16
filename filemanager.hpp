@@ -13,6 +13,7 @@ class FileManager{
 		Node* root;
 		void addNode(Node* newNode);
 		Node* findNode(std::string name);
+		void resetPointers();
 	public:
 		FileManager();
 		void ls();
