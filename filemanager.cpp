@@ -6,7 +6,6 @@ FileManager::FileManager(){
 	
 	this->root = root;
 	this->curDir = root;
-	this->curDir->setParent(nullptr);
 	this->cur = root;
 	this->prev = nullptr;
 }
@@ -15,6 +14,7 @@ void FileManager::mkdir(std::string name){
 	
 	Node* newDir = new Node(name, true);
 
+	//for first child of directory
 	if(curDir->getChild() == nullptr){
 		this->curDir->setChild(newDir);
 		newDir->setParent(this->curDir);
@@ -22,6 +22,7 @@ void FileManager::mkdir(std::string name){
 		this->prev = nullptr;
 		std::cout << newDir->getName() << " directory created." << std::endl;
 	}
+	//all other children of directory
 	else if(curDir->getChild()->getName() != newDir->getName()){
 		
 		newDir->setParent(this->curDir);
@@ -40,6 +41,7 @@ void FileManager::addf(std::string name){
         
 	Node* newFile = new Node(name, false);
 
+	//for first file in directory
         if(curDir->getChild() == nullptr){
                 this->curDir->setChild(newFile);
                 newFile->setParent(this->curDir);
@@ -49,6 +51,7 @@ void FileManager::addf(std::string name){
                 
 		std::cout << newFile->getName() << " file created." << std::endl;
         }
+	//for all other files in directory
         else if(curDir->getChild()->getName() != newFile->getName()){
                 
 		newFile->setParent(this->curDir);
@@ -73,7 +76,7 @@ void FileManager::pwd(){
 		workingDir = "/" + tempNode->getName() + workingDir;
 		tempNode = tempNode->getParent();
 	}
-	std::cout << "kenya" << workingDir << std::endl;
+	std::cout << "kenya" << workingDir << "/" << std::endl;
 }
 
 void FileManager::ls(){
@@ -98,6 +101,7 @@ void FileManager::cd(std::string dirName){
 		{
 			this->curDir = this->curDir->getParent();
 			resetPointers();
+			return pwd();
 		}
 		else
 		{
@@ -109,7 +113,7 @@ void FileManager::cd(std::string dirName){
 			if(tempNode->getName() == dirName){
 				this->curDir = tempNode;
 				resetPointers();
-				return pwd();
+				return;
 			}
 			else{
 				tempNode = tempNode->getNextForD();
@@ -123,6 +127,7 @@ void FileManager::rm(std::string name){
 	Node* tempNode = this->curDir->getChild();
 	bool fileFound = false;
 
+	//checks if a file or directory of that name exists before attempting to remove
 	while(tempNode != nullptr){
 		if(tempNode->getName() == name){
 			fileFound = true;

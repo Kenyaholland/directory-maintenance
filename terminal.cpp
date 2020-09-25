@@ -17,12 +17,14 @@ void Terminal::commandReadIn(){
 
 	if(commandFile.is_open()){
 		while(std::getline(commandFile, tempCommand)){
-
+			
+			//resets variables
 			ss.clear();
 			this->command = "";
 			this->mod1 = "";
 			this->mod2 = "";
 
+			//re-assigns variables
 			ss << tempCommand;
 			ss >> this->command;
 			ss >> this->mod1;
