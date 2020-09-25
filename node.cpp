@@ -20,10 +20,6 @@ void Node::setChild(Node* child)
 	this->child = child;
 }
 
-void Node::removeChild(){
-	this->child = nullptr;
-}
-
 void Node::setName(std::string nodeName){
 	this->name = nodeName;
 }

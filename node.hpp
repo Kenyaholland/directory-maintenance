@@ -15,7 +15,6 @@ class Node{
 		Node();
 		void addNextForD(Node* nextChild);
 		void setChild(Node* child);
-		void removeChild();
 		void setName(std::string nodeName);
 		void setParent(Node* parent);
 		void setNextForD(Node* nextNode);
