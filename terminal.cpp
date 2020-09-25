@@ -57,9 +57,6 @@ void Terminal::runCommand(){
 	if(command == "cd"){
 		this->fileSystem->cd(mod1);
 	}
-	if(command == "cp"){
-		this->fileSystem->cp(mod1, mod2);
-	}
 	if(command == "whereis"){
 		this->fileSystem->whereis(mod1);
 	}		

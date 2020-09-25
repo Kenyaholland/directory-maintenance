@@ -29,14 +29,6 @@ void FileManager::mkdir(std::string name){
 		this->prev = this->cur;
 		this->cur = newDir;
 		
-		/*while(this->cur != nullptr && this->cur->getName() < newDir->getName()){
-			this->prev = this->cur;
-			this->cur = this->cur->getNextForD();
-		}
-		
-		newDir->setNextForD(this->cur);
-		this->prev->setNextForD(newDir);*/
-		
 		std::cout << newDir->getName() << " directory created." <<std::endl;
 	}
 	else{
@@ -63,14 +55,6 @@ void FileManager::addf(std::string name){
                 this->cur->setNextForD(newFile);
 		this->prev = this->cur;
 		this->cur = newFile;
-
-		/*while(this->cur != nullptr && this->cur->getName() < newFile->getName()){
-                        this->prev = this->cur;
-                        this->cur = this->cur->getNextForD();
-                }
-                
-		newFile->setNextForD(this->cur);
-                this->prev->setNextForD(newFile);*/
 
                 std::cout << newFile->getName() << " file created." <<std::endl;
         }
@@ -135,24 +119,27 @@ void FileManager::cd(std::string dirName){
 }
 
 void FileManager::rm(std::string name){
-	/*Node* tempNode = findNode(name);
+	
+	Node* tempNode = this->curDir->getChild();
+	bool fileFound = false;
+
+	while(tempNode != nullptr){
+		if(tempNode->getName() == name){
+			fileFound = true;
+		}
+		tempNode = tempNode->getNextForD();
+		
+	}	
+	
+	if(fileFound == false){
+		std::cout << "no such file or directory" << std::endl;
+		return;
+	}
+
+	tempNode = findNode(name);
 
 	this->cur = tempNode->getNextForD();
-	this->prev->setNextForD(this->cur);*/
-
-	this->cur = this->cur->getChild();
-	this->prev = nullptr;
-
-	while(this->cur != nullptr){
-		if(this->cur->getName() == name){
-			this->cur = this->cur->getNextForD();
-			this->prev->setNextForD(this->cur);
-		}
-		else{
-			this->prev = this->cur;
-			this->cur = this->cur->getNextForD();
-		}
-	}
+	this->prev->setNextForD(this->cur);
 	resetPointers();
 }
 
@@ -168,18 +155,17 @@ void FileManager::mv(std::string fromName, std::string toName){
 	}
 	
 	findNode(fromName)->setName(toName);
-}
-
-void FileManager::cp(std::string name, std::string newName){
-	std::cout << "cp function" << std::endl;
+	resetPointers();
 }
 
 void FileManager::whereis(std::string name){
 	std::cout << "whereis function" << std::endl;
 }
 
+/* PRIVATE FUNCTIONS */
+
 Node* FileManager::findNode(std::string name){
-	Node* tempNode;
+	Node* tempNode = nullptr;
 	
 	this->cur = this->curDir->getChild();
 	this->prev = nullptr;
@@ -188,9 +174,9 @@ Node* FileManager::findNode(std::string name){
 		this->prev = this->cur;	
 		this->cur = this->cur->getNextForD();
 	}
+
 	tempNode = this->cur;
-	resetPointers();
-	
+
 	return tempNode;
 }
 

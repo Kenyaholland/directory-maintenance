@@ -23,7 +23,6 @@ class FileManager{
 		void rm(std::string name);
 		void mv(std::string fromName, std::string toName);
 		void cd(std::string dirname);
-		void cp(std::string name, std::string newName);
 		void whereis(std::string);
 };
 #endif
