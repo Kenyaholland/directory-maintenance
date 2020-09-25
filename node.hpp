@@ -13,7 +13,6 @@ class Node{
 	public:
 		Node(std::string nodeName, bool isDirectory);
 		Node();
-		void addNextForD(Node* nextChild);
 		void setChild(Node* child);
 		void setName(std::string nodeName);
 		void setParent(Node* parent);
