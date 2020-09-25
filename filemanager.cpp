@@ -114,7 +114,6 @@ void FileManager::cd(std::string dirName){
 		{
 			this->curDir = this->curDir->getParent();
 			resetPointers();
-			return pwd();
 		}
 		else
 		{
@@ -171,6 +170,13 @@ void FileManager::mv(std::string fromName, std::string toName){
 	findNode(fromName)->setName(toName);
 }
 
+void FileManager::cp(std::string name, std::string newName){
+	std::cout << "cp function" << std::endl;
+}
+
+void FileManager::whereis(std::string name){
+	std::cout << "whereis function" << std::endl;
+}
 
 Node* FileManager::findNode(std::string name){
 	Node* tempNode;

@@ -1,9 +1,9 @@
 #include <iostream>
-#include "filemanager.hpp"
+#include "terminal.hpp"
 int main(){
-	FileManager* fileSystem = new FileManager();
+	Terminal* terminal = new Terminal();
 
-	fileSystem->ls();
+	/*fileSystem->ls();
 	fileSystem->pwd();
 	fileSystem->mkdir("adir");
 	fileSystem->ls();
@@ -17,13 +17,7 @@ int main(){
 	fileSystem->cd("d1");
 	fileSystem->addf("f3");
 	fileSystem->addf("f2");
-	fileSystem->ls();
-	//fileSystem->mv("f3", "f2");
-	//fileSystem->mv("f3", "f4");
-	//fileSystem->ls();
-	fileSystem->cd("..");
-	fileSystem->rm("f3");
-	fileSystem->ls();
+	fileSystem->ls();*/
 
 	return 0;	
 }
