@@ -11,7 +11,6 @@ class FileManager{
 		Node* cur;
 		Node* curDir;
 		Node* root;
-		void addNode(Node* newNode);
 		Node* findNode(std::string name);
 		void resetPointers();
 	public:
