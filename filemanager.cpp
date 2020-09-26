@@ -67,7 +67,7 @@ void FileManager::addf(std::string name){
 
 }
 
-void FileManager::pwd(){
+std::string FileManager::pwd(){
 
 	std::string workingDir = "";
 	Node* tempNode = this->curDir;
@@ -76,7 +76,7 @@ void FileManager::pwd(){
 		workingDir = "/" + tempNode->getName() + workingDir;
 		tempNode = tempNode->getParent();
 	}
-	std::cout << "kenya" << workingDir << "/" << std::endl;
+	return "kenya" + workingDir + "/";
 }
 
 void FileManager::ls(){
@@ -101,7 +101,8 @@ void FileManager::cd(std::string dirName){
 		{
 			this->curDir = this->curDir->getParent();
 			resetPointers();
-			return pwd();
+			std::cout << pwd() << std::endl;
+			return;
 		}
 		else
 		{
@@ -164,7 +165,37 @@ void FileManager::mv(std::string fromName, std::string toName){
 }
 
 void FileManager::whereis(std::string name){
-	std::cout << "whereis function" << std::endl;
+	Node* tempNode = this->root->getChild();
+	Node* saveDir = nullptr;
+	std::string foundIn = "";
+	bool found = false;
+	
+	while(tempNode != nullptr){
+		if(tempNode->getName() == name){
+			foundIn += pwd() + "\n";
+			found = true;
+		}
+		if(tempNode->getIsDir() == true){
+			saveDir = tempNode;
+		}
+		tempNode = tempNode->getNextForD();
+	}
+
+	tempNode = saveDir->getChild();
+	while(tempNode != nullptr){
+		if(tempNode->getName() == name){
+			foundIn += pwd() + "\n";
+			found = true;
+		}
+		tempNode = tempNode->getNextForD();
+	}
+
+	if(found == false){
+		std::cout << name << " not found." << std::endl;
+		return;
+	}
+
+	std::cout << foundIn;
 }
 
 /* PRIVATE FUNCTIONS */

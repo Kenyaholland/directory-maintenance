@@ -17,7 +17,7 @@ class FileManager{
 		FileManager();
 		void ls();
 		void mkdir(std::string name);
-		void pwd();
+		std::string pwd();
 		void addf(std::string name);
 		void rm(std::string name);
 		void mv(std::string fromName, std::string toName);

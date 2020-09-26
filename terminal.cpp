@@ -45,7 +45,7 @@ void Terminal::runCommand(){
 		this->fileSystem->addf(mod1);
 	}
 	if(command == "pwd"){
-		this->fileSystem->pwd();
+		std::cout << this->fileSystem->pwd() << std::endl;
 	}
 	if(command == "ls" && mod1 != ""){
 		std::cout << "illegal command: " << command << " " << mod1 << std::endl;
