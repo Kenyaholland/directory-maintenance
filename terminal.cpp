@@ -6,8 +6,6 @@ Terminal::Terminal(){
 	this->mod2 = "";
 
 	this->fileSystem = new FileManager();
-
-	commandReadIn();
 }
 
 void Terminal::commandReadIn(){
