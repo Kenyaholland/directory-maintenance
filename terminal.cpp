@@ -67,7 +67,6 @@ void Terminal::runCommand(){
 		this->fileSystem->whereis(mod1);
 	}		
 	if(command == "bye"){	
-		std::cout << "bye!" << std::endl;
 		return;
 	}
 }

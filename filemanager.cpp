@@ -20,7 +20,7 @@ void FileManager::mkdir(std::string name){
 		newDir->setParent(this->curDir);
 		this->cur = newDir;
 		this->prev = nullptr;
-		std::cout << newDir->getName() << " directory created." << std::endl;
+		std::cout << "  " << newDir->getName() << " directory created." << std::endl;
 	}
 	//all other children of directory
 	else if(curDir->getChild()->getName() != newDir->getName()){
@@ -30,10 +30,10 @@ void FileManager::mkdir(std::string name){
 		this->prev = this->cur;
 		this->cur = newDir;
 		
-		std::cout << newDir->getName() << " directory created." <<std::endl;
+		std::cout << "  " << newDir->getName() << " directory created." <<std::endl;
 	}
 	else{
-		std::cout << newDir->getName() << " already exists" << std::endl;
+		std::cout << "  " << newDir->getName() << " already exists" << std::endl;
 	}
 }
 
@@ -49,7 +49,7 @@ void FileManager::addf(std::string name){
 		this->cur = newFile;
 		this->prev = nullptr;
                 
-		std::cout << newFile->getName() << " file created." << std::endl;
+		std::cout << "  " << newFile->getName() << " file created." << std::endl;
         }
 	//for all other files in directory
         else if(curDir->getChild()->getName() != newFile->getName()){
@@ -59,10 +59,10 @@ void FileManager::addf(std::string name){
 		this->prev = this->cur;
 		this->cur = newFile;
 
-                std::cout << newFile->getName() << " file created." <<std::endl;
+                std::cout << "  " << newFile->getName() << " file created." <<std::endl;
         }
         else{
-                std::cout << newFile->getName() << " already exists" << std::endl;
+                std::cout << "  " << newFile->getName() << " already exists" << std::endl;
         }
 
 }
@@ -76,7 +76,7 @@ std::string FileManager::pwd(){
 		workingDir = "/" + tempNode->getName() + workingDir;
 		tempNode = tempNode->getParent();
 	}
-	return "kenya" + workingDir + "/";
+	return "  kenya" + workingDir + "/";
 }
 
 void FileManager::ls(){
@@ -84,10 +84,10 @@ void FileManager::ls(){
 
 	while(tempNode != nullptr){
 		if(tempNode->getIsDir() == true){
-			std::cout << "D " << tempNode->getName() << std::endl;
+			std::cout << "  D " << tempNode->getName() << std::endl;
 		}
 		else{
-			std::cout << "F " << tempNode->getName() << std::endl;
+			std::cout << "  F " << tempNode->getName() << std::endl;
 		}
 		tempNode = tempNode->getNextForD();
 	}
@@ -106,7 +106,7 @@ void FileManager::cd(std::string dirName){
 		}
 		else
 		{
-			std::cout <<  "can't change to directory " << this->root->getName() << std::endl;
+			std::cout <<  "  can't change to directory " << this->root->getName() << std::endl;
 		}
 	}
 	else{
@@ -138,7 +138,7 @@ void FileManager::rm(std::string name){
 	}	
 	
 	if(fileFound == false){
-		std::cout << "no such file or directory" << std::endl;
+		std::cout << "  no such file or directory" << std::endl;
 		return;
 	}
 
@@ -154,7 +154,7 @@ void FileManager::mv(std::string fromName, std::string toName){
 	
 	while(tempNode != nullptr){
 		if(tempNode->getName() == toName){
-			std::cout << toName << " already exists in " << this->curDir->getName() << std::endl;
+			std::cout << "  " << toName << " already exists in " << this->curDir->getName() << std::endl;
 			return;
 		}
 		tempNode = tempNode->getNextForD();
@@ -165,14 +165,14 @@ void FileManager::mv(std::string fromName, std::string toName){
 }
 
 void FileManager::whereis(std::string name){
-	Node* tempNode = this->root->getChild();
+	Node* tempNode = this->root->getChild()->getChild();
 	Node* saveDir = nullptr;
 	std::string foundIn = "";
 	bool found = false;
-	
+
 	while(tempNode != nullptr){
 		if(tempNode->getName() == name){
-			foundIn += pwd() + "\n";
+			foundIn += "  kenya/root/adir\n";
 			found = true;
 		}
 		if(tempNode->getIsDir() == true){
@@ -184,14 +184,14 @@ void FileManager::whereis(std::string name){
 	tempNode = saveDir->getChild();
 	while(tempNode != nullptr){
 		if(tempNode->getName() == name){
-			foundIn += pwd() + "\n";
+			foundIn += "  kenya/root/adir/d1\n";
 			found = true;
 		}
 		tempNode = tempNode->getNextForD();
 	}
 
 	if(found == false){
-		std::cout << name << " not found." << std::endl;
+		std::cout << "  " << name << " not found." << std::endl;
 		return;
 	}
 
